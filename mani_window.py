@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from tkinter import *
 from tkinter.ttk import *
+from sqlite3 import *
+
 
 
 class main_bitton:
@@ -23,12 +25,13 @@ class main_bitton:
         def OnDoubleClick(event):
             item = self.derevo.identify('item', event.x, event.y)
             print("you clicked on", self.derevo.item(item, "text"))
-        self.derevo.bind('<Button-1>', OnDoubleClick)
+        #self.derevo.bind('<Button-1>', OnDoubleClick)
+        self.derevo.bind("<Button-3>", self.popup)
         self.derevo["columns"] = ("one", "two")
         self.derevo.column("#0", width=40)
         self.derevo.column("one", width=40)
         self.derevo.column("two", width=40)
-        self.derevo.heading("#0", text="Хрень")
+        self.derevo.heading("#0", text="Хрень", command=self.pod)
         self.derevo.heading("one", text="coulmn A")
         self.derevo.heading("two", text="column B")
         self.derevo.insert("", 0, text="Line 1", values=("1A", "1b"))
@@ -38,8 +41,27 @@ class main_bitton:
         self.derevo.insert("dir3", 3, text=" sub dir 3", values=("3A", " 3B"))
         self.derevo.pack()
         self.derevo.place(x=10, y=100, width=230, height=490)
+        self.menu = Menu(root, tearoff=0)
+        self.menu.add_command(label="Undo", command="hello")
+        self.menu.add_command(label="Redo", command="hello")
 
-    def pod(self, event):
+
+
+    def popup(self, event):
+        """action in event of button 3 on tree view"""
+        # select row under mouse
+        iid = self.derevo.identify_row(event.y)
+        if iid:
+            # mouse pointer over item
+            self.derevo.selection_set(iid)
+            self.menu.post(event.x_root, event.y_root)
+        else:
+            # mouse pointer not over item
+            # occurs when items do not fill frame
+            # no action required
+            pass
+
+    def pod(self):
         print("Привет новый мир")
 
 

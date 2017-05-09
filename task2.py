@@ -1,40 +1,21 @@
-from tkinter import  *
-class color_select:
-    def __init__(self):
-        var1 = IntVar()
-        var1.set(0)
-        var_flag1 = IntVar()
-        var_flag1.set(1)
-        var_flag2 = IntVar()
-        var_flag2.set(1)
-        var_flag3 = IntVar()
-        var_flag3.set(1)
-        var_flag4 = IntVar()
-        var_flag4.set(1)
-        self.label = Label(window, text="Скока надо:")
-        self.labe2 = Label(window, text="Цвет:")
-        self.select1 =  Radiobutton(window, text="0-10", variable=var1, value=1)
-        self.select2 = Radiobutton(window, text="10-15", variable=var1, value=2)
-        self.select3 = Radiobutton(window, text="15-20", variable=var1, value=3)
-        self.select4 = Radiobutton(window, text="20-25", variable=var1, value=4)
-        self.flag1 = Checkbutton(window, text="Red",
-                            variable=var_flag1, onvalue=1, offvalue=0, bg="red")
-        self.flag2 = Checkbutton(window, text="Blue",
-                                 variable=var_flag2, onvalue=2, offvalue=3, bg="Blue")
-        self.flag3 = Checkbutton(window, text="Green",
-                                 variable=var_flag3, onvalue=4, offvalue=5, bg="Green")
-        self.flag4 = Checkbutton(window, text="Yellow",
-                                 variable=var_flag4, onvalue=6, offvalue=7, bg="yellow")
-        self.label.pack()
-        self.select1.pack()
-        self.select2.pack()
-        self.select3.pack()
-        self.select4.pack()
-        self.labe2.pack()
-        self.flag1.pack()
-        self.flag2.pack()
-        self.flag3.pack()
-        self.flag4.pack()
-window = Tk()
-object = color_select()
-window.mainloop()
+ 
+
+tree = Treeview(root)
+
+tree["columns"]=("one","two")
+tree.column("one", width=100 )
+tree.column("two", width=100)
+tree.heading("one", text="coulmn A")
+tree.heading("two", text="column B")
+
+tree.insert("" , 0,    text="Line 1", values=("1A","1b"))
+
+id2 = tree.insert("", 1, "dir2", text="Dir 2")
+tree.insert(id2, "end", "dir 2", text="sub dir 2", values=("2A","2B"))
+
+##alternatively:
+tree.insert("", 3, "dir3", text="Dir 3")
+tree.insert("dir3", 3, text=" sub dir 3",values=("3A"," 3B"))
+
+tree.pack()
+root.mainloop()
