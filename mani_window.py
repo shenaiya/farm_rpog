@@ -29,7 +29,7 @@ class main_bitton:
         self.derevo.bind("<Button-3>", self.popup)
         self.derevo["columns"] = ("one", "two")
         self.derevo.column("#0", width=40)
-        self.derevo.column("one", width=40)
+        self.derevo.column("", width=40)
         self.derevo.column("two", width=40)
         self.derevo.heading("#0", text="Хрень", command=self.pod)
         self.derevo.heading("one", text="coulmn A")
